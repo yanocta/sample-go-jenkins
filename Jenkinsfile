@@ -1,5 +1,5 @@
 pipeline{
-    agent { Dockerfile true }
+    agent any
     environment {
         root = "go"
         branch = "master"
