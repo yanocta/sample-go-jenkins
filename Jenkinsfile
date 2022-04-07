@@ -7,27 +7,21 @@ pipeline{
     }
 
     stages {
-        stage("Go Version") {
-            steps{
-                sh "${root} version"
-            }
-        }
-
         stage("Git Clone") {
             steps{
                 git branch: "${branch}", url: "${scmUrl}"
             }
         }
 
-        stage("Go Test") {
+        stage("Go Dockerize") {
             steps{
-                sh "${root} test ./... -cover"
+                sh "docker build -t sample-go-jenkins ."
             }
         }
 
-        stage("Go Build") {
+        stage("Deploy") {
             steps{
-                sh "${root} build ./..."
+                echo "DEPLOY SUCCESS"
             }
         }
     }
